@@ -177,5 +177,15 @@ namespace OnTopReplica.Native {
         [DllImport("user32.dll")]
         private static extern bool AdjustWindowRectEx(ref NRectangle clientToWindowRect, long windowStyle, bool hasMenu, long extendedWindowStyle);
 
+        /// <summary>
+        /// Copies the visual content of a window to the specified device context.
+        /// </summary>
+        /// <param name="hwnd">Handle to the window to capture.</param>
+        /// <param name="hdc">Handle to the device context.</param>
+        /// <param name="flags">Drawing flags (0 = entire window, 1 = client area only).</param>
+        /// <returns>True if successful, false otherwise.</returns>
+        [DllImport("user32.dll")]
+        public static extern bool PrintWindow(IntPtr hwnd, IntPtr hdc, uint flags);
+
     }
 }

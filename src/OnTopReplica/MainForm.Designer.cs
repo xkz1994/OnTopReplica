@@ -38,6 +38,7 @@
             this.clickThroughToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupSwitchModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restoreLastClonedWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuContextOpacity = new System.Windows.Forms.ToolStripMenuItem();
             this.menuOpacity = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -151,7 +152,8 @@
             this.clickForwardingToolStripMenuItem,
             this.clickThroughToolStripMenuItem,
             this.groupSwitchModeToolStripMenuItem,
-            this.restoreLastClonedWindowToolStripMenuItem});
+            this.restoreLastClonedWindowToolStripMenuItem,
+            this.copyToClipboardToolStripMenuItem});
             this.advancedToolStripMenuItem.Image = global::OnTopReplica.Properties.Resources.xiao_wrench;
             this.advancedToolStripMenuItem.Name = "advancedToolStripMenuItem";
             this.advancedToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
@@ -192,6 +194,14 @@
             this.restoreLastClonedWindowToolStripMenuItem.Text = global::OnTopReplica.Strings.MenuRestoreLast;
             this.restoreLastClonedWindowToolStripMenuItem.ToolTipText = global::OnTopReplica.Strings.MenuRestoreLastTT;
             this.restoreLastClonedWindowToolStripMenuItem.Click += new System.EventHandler(this.Menu_RestoreLastWindow_click);
+            // 
+            // copyToClipboardToolStripMenuItem
+            // 
+            this.copyToClipboardToolStripMenuItem.Name = "copyToClipboardToolStripMenuItem";
+            this.copyToClipboardToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.copyToClipboardToolStripMenuItem.Text = global::OnTopReplica.Strings.MenuCopyToClipboard;
+            this.copyToClipboardToolStripMenuItem.ToolTipText = global::OnTopReplica.Strings.MenuCopyToClipboardTT;
+            this.copyToClipboardToolStripMenuItem.Click += new System.EventHandler(this.Menu_CopyToClipboard_click);
             // 
             // menuContextOpacity
             // 
@@ -596,6 +606,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuModeStandardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuModeFullscreenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuModeAllScreensToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyToClipboardToolStripMenuItem;
     }
 }
 

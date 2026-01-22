@@ -402,6 +402,12 @@ You can enable click-through later</value>
   <data name="MenuClickThroughTT" xml:space="preserve">
     <value>OnTopReplica will behave like a transparent overlay that lets your clicks through to the windows below.</value>
   </data>
+  <data name="MenuCopyToClipboard" xml:space="preserve">
+    <value>Copy to Clipboard</value>
+  </data>
+  <data name="MenuCopyToClipboardTT" xml:space="preserve">
+    <value>Copies the cloned window content as an image to the clipboard.</value>
+  </data>
   <data name="MenuClose" xml:space="preserve">
     <value>Close</value>
   </data>

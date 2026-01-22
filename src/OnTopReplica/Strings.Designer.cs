@@ -871,6 +871,24 @@ namespace OnTopReplica {
         }
         
         /// <summary>
+        ///   查詢類似 Copy to Clipboard 的當地語系化字串。
+        /// </summary>
+        internal static string MenuCopyToClipboard {
+            get {
+                return ResourceManager.GetString("MenuCopyToClipboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Copies the cloned window content as an image to the clipboard. 的當地語系化字串。
+        /// </summary>
+        internal static string MenuCopyToClipboardTT {
+            get {
+                return ResourceManager.GetString("MenuCopyToClipboardTT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 Close 的當地語系化字串。
         /// </summary>
         internal static string MenuClose {

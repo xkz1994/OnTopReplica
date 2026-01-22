@@ -402,6 +402,12 @@ To return to normal mode anytime, activate OnTopReplica by clicking on the task 
   <data name="MenuClickThroughTT" xml:space="preserve">
     <value>OnTopReplica会像一个透明的覆盖层并允许您点击其后面的窗口</value>
   </data>
+  <data name="MenuCopyToClipboard" xml:space="preserve">
+    <value>复制到剪贴板</value>
+  </data>
+  <data name="MenuCopyToClipboardTT" xml:space="preserve">
+    <value>将克隆窗口的内容作为图片复制到剪贴板</value>
+  </data>
   <data name="MenuClose" xml:space="preserve">
     <value>退出</value>
   </data>
