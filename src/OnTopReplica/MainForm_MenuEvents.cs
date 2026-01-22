@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -203,43 +203,19 @@ namespace OnTopReplica {
             if(_thumbnailPanel.IsShowingThumbnail == false || CurrentThumbnailWindowHandle == null) return;
 
             try {
-                if(Native.WindowMethods.GetWindowRect(CurrentThumbnailWindowHandle.Handle, out var rect) == false) throw new Win32Exception("GetWindowRect failed");
-                var width = rect.Right - rect.Left;
-                var height = rect.Bottom - rect.Top;
-
-                if(width <= 0 || height <= 0) throw new Exception("Invalid window size");
-
-                using(var bitmap = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb)) {
-                    // 先尝试使用 PrintWindow
-                    using(var graphics = Graphics.FromImage(bitmap)) {
-                        var hdc = graphics.GetHdc();
-                        try {
-                            // 使用 PW_RENDERFULLCONTENT (2) 标志来捕获 DirectComposition 内容
-                            if(Native.WindowMethods.PrintWindow(CurrentThumbnailWindowHandle.Handle, hdc, 2) == false) throw new Win32Exception("PrintWindow failed");
-                        }
-                        finally {
-                            graphics.ReleaseHdc(hdc);
-                        }
-                    }
-
-                    if(_thumbnailPanel.SelectedRegion != null && _thumbnailPanel.ConstrainToRegion) {
-                        var region = _thumbnailPanel.SelectedRegion;
-                        var sourceSize = _thumbnailPanel.ThumbnailOriginalSize;
-                        var regionRect = region.ComputeRegionRectangle(sourceSize);
-
-                        // 确保区域在有效范围内
-                        regionRect.Intersect(new Rectangle(0, 0, bitmap.Width, bitmap.Height));
-
-                        if(regionRect.Width > 0 && regionRect.Height > 0) {
-                            using(var croppedBitmap = bitmap.Clone(regionRect, bitmap.PixelFormat)) {
-                                Clipboard.SetImage(croppedBitmap);
-                            }
-                        }
-                    }
-                    else {
-                        Clipboard.SetImage(bitmap);
-                    }
+                // 获取 ThumbnailPanel 在屏幕上的位置
+                var screenPoint = _thumbnailPanel.PointToScreen(Point.Empty);
+                
+                // 从屏幕直接截取 ThumbnailPanel 显示区域
+                var bitmap = new Bitmap(_thumbnailPanel.Width, _thumbnailPanel.Height);
+                using (var graphics = Graphics.FromImage(bitmap)) {
+                    graphics.CopyFromScreen(screenPoint.X, screenPoint.Y, 0, 0, 
+                        new Size(_thumbnailPanel.Width, _thumbnailPanel.Height), 
+                        CopyPixelOperation.SourceCopy);
                 }
+                
+                Clipboard.SetImage(bitmap);
+                bitmap.Dispose();
             }
             catch(Exception ex) {
                 Log.Write("Failed to copy to clipboard: {0}", ex.Message);
