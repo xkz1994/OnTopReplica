@@ -70,14 +70,16 @@ public void SetThumbnailHandle(WindowHandle handle, ThumbnailRegion region) {
 
 ### 2. 复制到剪贴板
 
-**代码位置**：[src/OnTopReplica/MainForm_MenuEvents.cs](src/OnTopReplica/MainForm_MenuEvents.cs)
+**代码位置**：[src/OnTopReplica/MainForm_Features.cs](src/OnTopReplica/MainForm_Features.cs)
 
 **实现原理**：
 使用 Windows `PrintWindow` API 捕获源窗口的截图，如果设置了区域则裁剪到选定区域，然后复制到系统剪贴板。
 
+**快捷键**：`Ctrl+C`
+
 ```csharp
-// MainForm_MenuEvents.cs - 复制到剪贴板
-private void Menu_CopyToClipboard_click(object sender, EventArgs e) {
+// MainForm_Features.cs - 复制到剪贴板
+public void CopyThumbnailToClipboard() {
     // 获取源窗口的截图
     var bitmap = CaptureWindow(CurrentThumbnailWindowHandle.Handle);
     
@@ -91,20 +93,19 @@ private void Menu_CopyToClipboard_click(object sender, EventArgs e) {
     Clipboard.SetImage(bitmap);  // 复制到剪贴板
 }
 
-// 使用 PrintWindow API 捕获窗口
-private Bitmap CaptureWindow(IntPtr hwnd) {
-    Native.WindowMethods.GetWindowRect(hwnd, out rect);
-    var bitmap = new Bitmap(width, height);
-    using (var graphics = Graphics.FromImage(bitmap)) {
-        IntPtr hdc = graphics.GetHdc();
-        Native.WindowMethods.PrintWindow(hwnd, hdc, 0);
-        graphics.ReleaseHdc(hdc);
+// MainForm.cs - 快捷键处理
+protected override void OnKeyUp(KeyEventArgs e) {
+    //CTRL+C - Copy to clipboard
+    if (e.Modifiers == Keys.Control && e.KeyCode == Keys.C) {
+        e.Handled = true;
+        CopyThumbnailToClipboard();
     }
-    return bitmap;
 }
 ```
 
-**使用方式**：右键菜单 → 高级 → 复制到剪贴板
+**使用方式**：
+- 右键菜单 → 高级 → 复制到剪贴板
+- 快捷键 `Ctrl+C`
 
 ---
 

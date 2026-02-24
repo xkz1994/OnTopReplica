@@ -244,8 +244,14 @@ namespace OnTopReplica {
         protected override void OnKeyUp(KeyEventArgs e) {
             base.OnKeyUp(e);
 
+            //CTRL+C - Copy to clipboard
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.C) {
+                e.Handled = true;
+                CopyThumbnailToClipboard();
+            }
+
             //ALT
-            if (e.Modifiers == Keys.Alt) {
+            else if (e.Modifiers == Keys.Alt) {
                 if (e.KeyCode == Keys.Enter) {
                     e.Handled = true;
                     FullscreenManager.Toggle();
